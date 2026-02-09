@@ -66,22 +66,21 @@ The stack uses a **hybrid C++ / Python** architecture: **C++** for Gazebo plugin
 
 ## Gallery
 
-Add your own screenshots into the `assets/` folder for them to appear here. Suggested filenames: **5 stand views** — `stand_1.png` … `stand_5.png`; **2 camera views** — `camera_view_1.png`, `camera_view_2.png`.
-
-### Stand & layout (5 images)
+### System Layout & Simulation Views
+The simulation features a 9-meter conveyor belt with 6 distinct sorting stations.
 
 | | | |
-|---|---|---|
-| ![Stand / layout 1](assets/stand_1.png) | ![Stand / layout 2](assets/stand_2.png) | ![Stand / layout 3](assets/stand_3.png) |
-| *Stand / layout 1* | *Stand / layout 2* | *Stand / layout 3* |
-| ![Stand / layout 4](assets/stand_4.png) | ![Stand / layout 5](assets/stand_5.png) | |
+|:---:|:---:|:---:|
+| ![Stand 1](assets/stand_1.png) | ![Stand 2](assets/stand_2.png) | ![Stand 3](assets/stand_3.png) |
+| **Station 1 & 2** | **Full Line View** | **Conveyor Perspective** |
+| ![Stand 4](assets/stand_4.png) | ![Stand 5](assets/stand_5.png) | ![Stand 6](assets/stand_6.png) |
+| **Sorting Logic** | **Side View** | **Top/Rear View** |
 
-### Camera views (2 images)
-
+### Computer Vision & Dashboard
 | | |
-|---|---|
-| ![Camera view 1](assets/camera_view_1.png) | ![Camera view 2](assets/camera_view_2.png) |
-| *Camera view 1* | *Camera view 2* |
+|:---:|:---:|
+| ![Camera View 1](assets/camera_view_1.png) | ![Camera View 2](assets/camera_view_2.png) |
+| **Live Object Detection** | **Dashboard Interface** |
 
 ---
 
@@ -98,7 +97,7 @@ Add your own screenshots into the `assets/` folder for them to appear here. Sugg
 ```bash
 mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws/src
-git clone <your_repo_url> pil_ayiklama_sim
+git clone https://github.com/fuatsimsek/Autonomous-Waste-Sorting-System.git
 ```
 
 ### 3. Dependencies
@@ -152,23 +151,24 @@ Simulation results at **0.6 m/s** belt speed:
 ## Project Structure
 
 ```
-pil_ayiklama_sim/
-├── assets/           # Screenshots: stand_1..5, camera_view_1..2
-├── config/           # Controllers, RViz
-├── launch/           # sorting.launch
-├── scripts/          # Python nodes (detector, controller, dashboard, tests)
-├── src/              # C++ Gazebo plugins (conveyor, spawner, etc.)
-├── urdf/             # main_station.xacro
-├── worlds/           # sorting_world.sdf
-├── README.md
-└── SYSTEM_v2.0_README.md  # Detailed Turkish system notes
+Autonomous-Waste-Sorting-System/
+├── assets/             # Screenshots: stand_1..6, camera_view_1..2
+├── config/             # Controllers, RViz
+├── launch/             # sorting.launch
+├── scripts/            # Python nodes (detector, controller, dashboard, tests)
+├── src/                # C++ Gazebo plugins (conveyor, spawner, etc.)
+├── urdf/               # main_station.xacro
+├── worlds/             # sorting_world.sdf
+├── CMakeLists.txt      # Build configuration
+├── package.xml         # Package dependencies
+└── README.md           # Documentation
 ```
 
 ---
 
 ## Contributing & License
 
-Contributions are welcome. This project is under the **MIT** license (see [LICENSE](LICENSE) if present).
+Contributions are welcome. This project is under the **MIT** license.
 
 ---
 

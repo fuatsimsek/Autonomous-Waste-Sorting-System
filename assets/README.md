@@ -2,21 +2,22 @@
 
 Place your screenshots here so they appear in the main **README.md** gallery.
 
-## Stand / layout (5 images)
+## System layout & simulation (6 images)
 
-| File          | Description (example)        |
-|---------------|-----------------------------|
-| `stand_1.png` | Overview or station 1       |
-| `stand_2.png` | Station 2 / angle 2         |
-| `stand_3.png` | Station 3 / angle 3         |
-| `stand_4.png` | Station 4 / angle 4         |
-| `stand_5.png` | Station 5 / angle 5         |
+| File | Caption in README |
+|------|-------------------|
+| `stand_1.png` | Station 1 & 2 |
+| `stand_2.png` | Full Line View |
+| `stand_3.png` | Conveyor Perspective |
+| `stand_4.png` | Sorting Logic |
+| `stand_5.png` | Side View |
+| `stand_6.png` | Top/Rear View |
 
-## Camera views (2 images)
+## Computer vision & dashboard (2 images)
 
-| File              | Description (example)   |
-|-------------------|-------------------------|
-| `camera_view_1.png` | Dashboard or camera 1   |
-| `camera_view_2.png` | Camera 2 / alternate view |
+| File | Caption in README |
+|------|-------------------|
+| `camera_view_1.png` | Live Object Detection |
+| `camera_view_2.png` | Dashboard Interface |
 
 Use **.png** or **.jpg**; if you use .jpg, update the image paths in the root **README.md** accordingly.

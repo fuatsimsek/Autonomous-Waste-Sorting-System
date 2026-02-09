@@ -1,0 +1,45 @@
+# Joint State Controller (publishes all joint states)
+joint_state_controller:
+  type: joint_state_controller/JointStateController
+  publish_rate: 50
+
+# Gate Controllers (6 gates for 6 categories)
+gate1_controller:
+  type: effort_controllers/JointPositionController
+  joint: gate1_joint
+  pid: {p: 50.0, i: 0.5, d: 3.0, i_clamp: 2.0}
+
+gate2_controller:
+  type: effort_controllers/JointPositionController
+  joint: gate2_joint
+  pid: {p: 50.0, i: 0.5, d: 3.0, i_clamp: 2.0}
+
+gate3_controller:
+  type: effort_controllers/JointPositionController
+  joint: gate3_joint
+  pid: {p: 50.0, i: 0.5, d: 3.0, i_clamp: 2.0}
+
+gate4_controller:
+  type: effort_controllers/JointPositionController
+  joint: gate4_joint
+  pid: {p: 50.0, i: 0.5, d: 3.0, i_clamp: 2.0}
+
+gate5_controller:
+  type: effort_controllers/JointPositionController
+  joint: gate5_joint
+  pid: {p: 50.0, i: 0.5, d: 3.0, i_clamp: 2.0}
+
+gate6_controller:
+  type: effort_controllers/JointPositionController
+  joint: gate6_joint
+  pid: {p: 50.0, i: 0.5, d: 3.0, i_clamp: 2.0}
+
+# Gazebo PID gains
+gazebo_ros_control:
+  pid_gains:
+    gate1_joint: {p: 50.0, i: 0.5, d: 3.0, i_clamp: 2.0}
+    gate2_joint: {p: 50.0, i: 0.5, d: 3.0, i_clamp: 2.0}
+    gate3_joint: {p: 50.0, i: 0.5, d: 3.0, i_clamp: 2.0}
+    gate4_joint: {p: 50.0, i: 0.5, d: 3.0, i_clamp: 2.0}
+    gate5_joint: {p: 50.0, i: 0.5, d: 3.0, i_clamp: 2.0}
+    gate6_joint: {p: 50.0, i: 0.5, d: 3.0, i_clamp: 2.0}

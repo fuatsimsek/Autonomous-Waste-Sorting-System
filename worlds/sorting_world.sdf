@@ -1,0 +1,87 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="professional_sorting_world">
+    
+    <!-- Physics -->
+    <physics type="ode">
+      <max_step_size>0.001</max_step_size>
+      <real_time_update_rate>1000</real_time_update_rate>
+      <real_time_factor>1.0</real_time_factor>
+      <gravity>0 0 -9.81</gravity>
+      <ode>
+        <solver>
+          <type>quick</type>
+          <iters>50</iters>
+          <sor>1.3</sor>
+        </solver>
+        <constraints>
+          <cfm>0.0</cfm>
+          <erp>0.2</erp>
+          <contact_max_correcting_vel>100</contact_max_correcting_vel>
+          <contact_surface_layer>0.001</contact_surface_layer>
+        </constraints>
+      </ode>
+    </physics>
+
+    <!-- Scene -->
+    <scene>
+      <!-- Ortam ışığını düşürerek renk solmasını engelle -->
+      <ambient>0.25 0.25 0.25 1</ambient>
+      <background>0.5 0.5 0.5 1</background>
+      <shadows>true</shadows>
+    </scene>
+
+    <!-- Sun -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <!-- Ground -->
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <!-- PLUGIN 1: Random Box Spawner -->
+    <!-- Spawns INSIDE funnel, objects fall through to belt -->
+    <plugin name="random_box_spawner" filename="librandom_box_spawner.so">
+      <spawn_interval>3.0</spawn_interval>
+      <box_size>0.08</box_size>
+      <!-- Drop INSIDE funnel (funnel is at belt + 0.6, spawn at belt + 1.2) -->
+      <!-- Daha dik düşüş: bant yüzeyine yakın yükseklik -->
+      <drop_height>0.65</drop_height>
+      <!-- Spawn at funnel location (x=-4.5) -->
+      <spawn_x>-4.5</spawn_x>
+      <!-- Dikey düşüş: y sapması yok -->
+      <spawn_y_spread>0.0</spawn_y_spread>
+    </plugin>
+
+    <!-- PLUGIN 2: Conveyor Mover -->
+    <!-- Moves objects on belt continuously -->
+    <plugin name="conveyor_mover" filename="libconveyor_mover.so">
+      <!-- Belt boundaries -->
+      <min_x>-4.6</min_x>
+      <max_x>4.5</max_x>
+      <min_y>-0.35</min_y>
+      <max_y>0.35</max_y>
+      <!-- Z: belt surface is at 0.50, objects at 0.55-0.75 -->
+      <min_z>0.50</min_z>
+      <max_z>0.8</max_z>
+      <!-- Belt speed -->
+      <speed>0.6</speed>
+      <!-- Update frequency -->
+      <update_period>0.02</update_period>
+    </plugin>
+
+    <!-- PLUGIN 3: Grinder Remover -->
+    <!-- Removes any boxes that reach the end grinder bin -->
+    <plugin name="grinder_remover" filename="libgrinder_remover.so">
+      <min_x>4.2</min_x>
+      <max_x>5.2</max_x>
+      <min_y>-0.6</min_y>
+      <max_y>0.6</max_y>
+      <min_z>0.0</min_z>
+      <max_z>1.0</max_z>
+    </plugin>
+
+  </world>
+</sdf>

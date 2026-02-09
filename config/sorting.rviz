@@ -1,0 +1,87 @@
+Panels:
+  - Class: rviz/Displays
+    Name: Displays
+  - Class: rviz/Selection
+    Name: Selection
+  - Class: rviz/Tool Properties
+    Name: Tool Properties
+  - Class: rviz/Views
+    Name: Views
+  - Class: rviz/Time
+    Name: Time
+
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Alpha: 0.5
+      Cell Size: 1
+      Class: rviz/Grid
+      Color: 160; 160; 164
+      Enabled: true
+      Name: Grid
+      Plane: XY
+      Plane Cell Count: 20
+      Reference Frame: <Fixed Frame>
+
+    - Class: rviz/RobotModel
+      Enabled: true
+      Name: Robot Model
+      Robot Description: robot_description
+      TF Prefix: ""
+      Visual Enabled: true
+
+    - Class: rviz/TF
+      Enabled: true
+      Frame Timeout: 15
+      Frames:
+        All Enabled: true
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+
+    - Class: rviz/Camera
+      Enabled: true
+      Image Topic: /camera/image_raw
+      Name: Camera View
+      Overlay Alpha: 0.5
+      Queue Size: 2
+      Transport Hint: raw
+      Zoom Factor: 1
+
+    - Class: rviz/Image
+      Enabled: true
+      Image Topic: /detection_debug
+      Name: Detection Debug
+      Queue Size: 2
+      Transport Hint: raw
+
+    - Class: rviz/MarkerArray
+      Enabled: true
+      Marker Topic: /detection_markers
+      Name: Detected Objects
+      Queue Size: 100
+
+  Enabled: true
+  Global Options:
+    Background Color: 48; 48; 48
+    Fixed Frame: line_base_link
+    Frame Rate: 30
+
+  Tools:
+    - Class: rviz/Interact
+    - Class: rviz/MoveCamera
+    - Class: rviz/Select
+
+  Views:
+    Current:
+      Class: rviz/Orbit
+      Distance: 8.0
+      Focal Point:
+        X: 0
+        Y: 0
+        Z: 0.5
+      Name: Current View
+      Pitch: 0.8
+      Target Frame: <Fixed Frame>
+      Yaw: 2.5

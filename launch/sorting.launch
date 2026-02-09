@@ -1,0 +1,87 @@
+<launch>
+  <!-- Arguments -->
+  <arg name="paused" default="false"/>
+  <arg name="gui" default="true"/>
+  <arg name="debug" default="false"/>
+  <arg name="verbose" default="true"/>
+  
+  <!-- Start Gazebo with custom world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find pil_ayiklama_sim)/worlds/sorting_world.sdf"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="debug" value="$(arg debug)"/>
+    <arg name="verbose" value="$(arg verbose)"/>
+  </include>
+
+  <!-- Robot description -->
+  <param name="robot_description" 
+         command="$(find xacro)/xacro '$(find pil_ayiklama_sim)/urdf/main_station.xacro'"/>
+
+  <!-- Spawn the sorting station -->
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_sorting_station"
+        args="-urdf -param robot_description -model sorting_station -x 0 -y 0 -z 0" 
+        output="screen"/>
+
+  <!-- Robot state publisher -->
+  <node pkg="robot_state_publisher" type="robot_state_publisher" 
+        name="robot_state_publisher" output="screen">
+    <param name="publish_frequency" value="50"/>
+  </node>
+
+  <!-- Joint state publisher (for visualization in RViz) -->
+  <node pkg="joint_state_publisher" type="joint_state_publisher" 
+        name="joint_state_publisher" output="screen">
+    <param name="use_gui" value="false"/>
+  </node>
+
+  <!-- Load controller configuration -->
+  <rosparam file="$(find pil_ayiklama_sim)/config/controllers.yaml" command="load"/>
+  
+  <!-- Spawn controllers (6 gates) -->
+  <node pkg="controller_manager" type="spawner" name="controller_spawner"
+        args="joint_state_controller 
+              gate1_controller 
+              gate2_controller 
+              gate3_controller 
+              gate4_controller 
+              gate5_controller
+              gate6_controller"
+        output="screen" 
+        respawn="false"/>
+
+  <!-- Color Detection Node -->
+  <node pkg="pil_ayiklama_sim" type="color_detector.py" name="color_detector" 
+        output="screen">
+    <param name="image_topic" value="/camera/image_raw"/>
+    <param name="min_area" value="150"/>
+    <param name="show_debug" value="true"/>
+  </node>
+
+  <!-- Sorter Controller Node -->
+  <node pkg="pil_ayiklama_sim" type="sorter_controller.py" name="sorter_controller" 
+        output="screen">
+    <param name="belt_speed" value="0.6"/>
+  </node>
+
+  <!-- Conveyor Driver Node -->
+  <node pkg="pil_ayiklama_sim" type="conveyor_driver.py" name="conveyor_driver" 
+        output="screen">
+    <param name="speed" value="0.6"/>
+  </node>
+
+  <!-- RViz (optional) -->
+  <node if="$(arg debug)" pkg="rviz" type="rviz" name="rviz"
+        args="-d $(find pil_ayiklama_sim)/config/sorting.rviz"/>
+
+  <!-- Professional Dashboard GUI -->
+  <node pkg="pil_ayiklama_sim" type="system_dashboard.py" name="system_dashboard"
+        output="screen" required="false">
+    <param name="update_rate" value="10"/>
+  </node>
+
+  <!-- RViz for 3D visualization -->
+  <node if="$(arg debug)" pkg="rviz" type="rviz" name="rviz"
+        args="-d $(find pil_ayiklama_sim)/config/sorting.rviz"/>
+
+</launch>
